@@ -2,9 +2,19 @@
 
 Mở `index.html` bằng trình duyệt, không cần cài gì. Toàn bộ dữ liệu là dựng.
 
-- **Màn hình 1 (khách):** ca #12 (viên thuốc mất tên), cùng các nút mẫu #4 (đòi kháng sinh), #5 (khách gắt), #9 (đau họng, AI soạn để dược sĩ duyệt), ca bé sốt, lơ mơ. Bấm "Làm lại" trước khi đổi sang ca khác.
+- **Màn hình 1 (khách):** ca #12 (viên thuốc mất tên), ca #6 (bé 2 tuổi li bì, ca bắt buộc của track), cùng các nút mẫu #4 (đòi kháng sinh), #5 (khách gắt), #9 (đau họng, AI soạn để dược sĩ duyệt), ca lạ bé sốt, lơ mơ. Bấm "Làm lại" trước khi đổi sang ca khác.
 - **Màn hình 2 (dược sĩ):** nhận ca chuyển kèm tóm tắt; thấy ca khách bỏ qua khuyến cáo đi khám.
-- **Số cam 1, 2, 3:** nguyên tắc của ca #4. **Số 4, 5, 6:** G2, G10, G9 của ca #12; **7, 8:** luồng duyệt ca #9 (xem chú thích cuối trang).
+- **Số cam 1, 2, 3:** nguyên tắc của ca #4. **Số 4, 5, 6:** G2, G10, G9 của ca #12; **7, 8:** luồng duyệt ca #9; **9:** G9 của ca #6 (xem chú thích cuối trang).
+
+## Demo ca #6 (bắt buộc)
+
+1. Bấm "Làm lại" → "Ca 6: bé li bì (bắt buộc)" → "Gửi". Banner đỏ "Có dấu hiệu nguy hiểm" hiện ngay, không hỏi trước; màn hình dược sĩ có "Ca khẩn · Không vào hàng chờ" với người uống "Trẻ 2 tuổi" và dấu hiệu "li bì" lấy từ tin khách.
+2. "Tôi đang đưa bé đi": dược sĩ thấy ghi chú. "**⑨ Bé không li bì, tôi tả nhầm**": hiện 6 dấu hiệu dạng nút; chọn một dấu hiệu thì giữ khuyến cáo, "Không có dấu hiệu nào" thì chuyển dược sĩ **ưu tiên**, banner vẫn còn, không gợi ý thuốc.
+3. "Bỏ qua" phải qua bước xác nhận; vẫn bỏ qua thì dược sĩ thấy ca "Khách bỏ qua khuyến cáo" và nhắn hỏi thăm.
+
+## Ca lạ
+
+Luật ưu tiên chạy trước sàng lọc: dấu hiệu nguy hiểm (gồm nói ngọng, tê nửa người, sưng môi/mặt) → khuyên đi khám · phản ứng sau dùng thuốc → dừng gợi ý, hỏi dấu hiệu nguy hiểm · nhờ lưu hồ sơ → thẻ xin phép · hỏi giá/tồn kho → nói rõ không có nguồn. AI chỉ soạn gợi ý cho triệu chứng nhẹ (đau họng, ho, sổ mũi, nhiệt miệng) khi tin không có nhóm rủi ro (mang thai, cho con bú, trẻ nhỏ, người nhà, tuổi dưới 12 hoặc từ 60, thuốc kê đơn…), và dược sĩ vẫn phải duyệt trước khi gửi.
 
 ## Demo ca #12
 
