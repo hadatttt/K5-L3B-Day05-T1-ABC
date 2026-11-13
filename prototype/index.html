@@ -422,10 +422,10 @@ function pillHasDanger(text){
   return DANGER.test(text.replace(denied, ''));
 }
 function pillWhoFromText(text){
-  const explicit = text.match(/người (?:uống|dùng) (?:thuốc )?là\s+(.+)/i); if (explicit) text = explicit[1];
-  const self = /(?<!\p{L})(?:tôi|mình|em)\s+(?:(?:đang|bị|vừa|đã)\s+)?(?:đau|uống)/iu.test(text);
+  const explicit = text.match(/người (?:uống|dùng) (?:thuốc )?là\s+(.+)/i); if (explicit) text = explicit[1].split(/[,.;?!\n](?!\s*\d{1,3}\s*tuổi)/)[0];
+  const age = text.match(/^\s*(?:tôi|mình|em),?\s+(?:năm nay\s+)?(\d{1,3})\s*tuổi/iu);
+  const self = !!age || /(?<!\p{L})(?:tôi|mình|em)\s+(?:(?:đang|bị|vừa|đã)\s+)?(?:đau|uống)/iu.test(text);
   const known = whoFromText(text); if (known !== 'chưa rõ') return self ? '' : known;
-  const age = text.match(/(?<!\p{L})(?:tôi|mình|em),?\s+(?:năm nay\s+)?(\d{1,3})\s*tuổi/iu);
   if (age) return 'Tôi, ' + age[1] + ' tuổi (theo tin khách)';
   if (self) return 'Người nhắn (theo tin khách, chưa rõ tuổi)';
   return '';

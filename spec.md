@@ -55,10 +55,10 @@ Lớp: ① nguồn sự thật · ② mơ hồ / thiếu thông tin · ③ ngoà
   - Ba nút: **"Gặp dược sĩ ngay"** (nút chính) · "Bổ sung chữ trên vỉ" · "Tôi đã uống rồi". Khách không cần điền form mới được chuyển.
   - Không có thẻ sản phẩm, nút đặt mua hay tên thuốc do AI đoán. Khối quyết định bên cạnh ghi **"Chưa xác minh danh tính thuốc"**, không hiện một con số phần trăm dễ bị hiểu thành độ chắc nhận diện.
 - **Làm gì tiếp:**
-  - **"Gặp dược sĩ ngay":** `chuyen_duoc_si` với thông tin đã có. Chat hiện "Đang chờ dược sĩ nhận", nhắc tạm chưa uống và hướng dẫn mang vỉ tới nhà thuốc nếu cần kiểm tra trực tiếp. Thông tin người uống nói rõ trong tin gốc được ghi vào tóm tắt với nhãn "theo tin khách"; chưa rõ thì giữ "Chưa cung cấp". Khách có thể sửa qua form. Chuyển ca không có nghĩa là thuốc đã được xác định.
+  - **"Gặp dược sĩ ngay":** `chuyen_duoc_si` với thông tin đã có. Chat hiện "Đang chờ dược sĩ nhận", nhắc tạm chưa uống và mang vỉ tới nhà thuốc nếu cần kiểm tra trực tiếp. Tóm tắt ghi người uống theo tin khách; chưa rõ thì để "Chưa cung cấp" và cho bổ sung. Chuyển ca không có nghĩa thuốc đã được xác định.
   - **"Bổ sung chữ trên vỉ":** form gồm chữ còn đọc được · người dùng thuốc · thuốc đang dùng, dị ứng hoặc thông tin thêm. Các ô không bắt buộc; bỏ trống ghi **"Chưa cung cấp"**, không suy thành "không có". Bấm "Gửi thông tin cho dược sĩ" thì chuyển nguyên văn, không tự điền nốt tên thuốc. Prototype chỉ nhận chữ gõ; cần xem vỉ thì kiểm tra trực tiếp.
-  - **"Tôi đã uống rồi":** đổi thẻ nhắc thành hướng dẫn liên hệ y tế ngay, kể cả chưa thấy bất thường (xem lỗi 1 bên dưới). Hỏi thêm giờ uống, lượng đã uống và người dùng thuốc bằng các ô không bắt buộc; không tính liều và không bắt chờ điền xong mới đi tìm hỗ trợ.
-  - **Khách sửa thông tin (correction):** "Bổ sung / sửa thông tin" mở form đã điền; gửi lại cập nhật **cùng mã ca**, kèm nhãn "Thông tin vừa cập nhật — dược sĩ kiểm tra lại". Tin nhắn bổ sung và thẻ theo dõi cũng dùng thông tin của ca này; sửa dữ liệu không mở quyền gợi ý thuốc.
+  - **"Tôi đã uống rồi":** đổi thẻ nhắc thành hướng dẫn liên hệ y tế ngay, kể cả chưa thấy bất thường. Hỏi thêm giờ uống, lượng đã uống và người dùng thuốc bằng các ô không bắt buộc; không tính liều và không bắt chờ điền xong mới đi tìm hỗ trợ.
+  - **Khách sửa thông tin:** "Bổ sung / sửa thông tin" mở form đã điền; gửi lại cập nhật **cùng mã ca**, kèm nhãn "Thông tin vừa cập nhật — dược sĩ kiểm tra lại". Tin nhắn bổ sung và thẻ theo dõi cũng dùng thông tin của ca này; sửa dữ liệu không mở quyền gợi ý thuốc.
   - **Có dấu hiệu nguy hiểm:** tin nhắn hoặc phần thông tin thêm có khó thở, co giật, lơ mơ, đau đầu dữ dội, yếu tay chân, nói khó… thì hiện khuyến cáo đi khám ngay, nút "Gọi 115 (mô phỏng)" và báo ca khẩn song song; không chờ xác minh thuốc. Nút "Tôi có dấu hiệu nguy hiểm" trong nhánh đã uống cũng đi đường này.
   - **Khách không trả lời:** thẻ nhắc vẫn còn; không tự chuyển ca, lưu ghi chú sức khỏe cho lần sau hay xác nhận dùng được. Khách gắt, từ chối trả lời thêm: giữ giới hạn, chuyển dược sĩ với thông tin đã có, không hỏi lại từ đầu. Ở ca chuyển thường, trước khi dược sĩ nhận, "Hủy chuyển" gỡ ca chờ nhưng không gỡ lời nhắc; khách có thể chuyển lại. Dược sĩ đã nhận thì báo đúng trạng thái đã nhận, không còn nút hủy ca chờ.
 - **Ai được báo, sau bao lâu:** dược sĩ nhận thông tin ngay khi chuyển: mã ca, tin gốc và bổ sung, chữ trên vỉ (**"khách cung cấp, chưa xác minh"**), người dùng thuốc, tình trạng đã uống, giờ/lượng nếu có. Thiếu dữ liệu ghi "Chưa cung cấp / Chưa xác nhận". Đã uống thì ca chuyển được đánh dấu ưu tiên; có nguy hiểm thì báo ca khẩn ngay. Ca thường chỉ hiện đã nhận khi dược sĩ bấm "Nhận ca", không hứa mốc chờ. Hai màn hình mô phỏng việc chuyển/nhận, không kết nối người trực thật.
@@ -78,12 +78,9 @@ Lớp: ① nguồn sự thật · ② mơ hồ / thiếu thông tin · ③ ngoà
   - **G10, Thu hẹp phạm vi khi nghi ngờ** → câu hỏi và nút **⑤ "Bổ sung chữ trên vỉ"**; chỉ nhận chữ để chuyển người, không đoán tên, không có nút mua.
   - **G9, Sửa dễ dàng** → nút **⑥ "Bổ sung / sửa thông tin"** cập nhật cùng hồ sơ; "Tôi đã uống rồi" đổi ngay hướng xử lý. Dược sĩ nhìn thấy thông tin mới, khách không phải kể lại toàn bộ.
 - **Lỗi sửa câu chữ không cứu được, và thiết kế cứu nó:**
-  - **Lỗi 1: hệ thống vẫn chỉ dặn "tạm chưa uống" khi khách đã uống**, dù trước khi hỏi hay trong lúc chat. Câu nhắc cũ không còn đủ; cần đổi hướng xử lý ngay.
-    - **Thiết kế cứu:** nút "Tôi đã uống rồi" có ở lượt đầu, trong form bổ sung và thẻ chuyển ca thường khi chưa ghi nhận đã uống; khách cũng có thể báo qua ô chat. Bấm vào thì hiện ngay: "Anh/chị không uống thêm viên này và giữ lại vỉ thuốc nhé. Vì chưa biết đã uống thuốc gì, anh/chị hãy liên hệ cơ sở y tế ngay, kể cả chưa thấy bất thường; đừng chờ trả lời qua chat." Có nút gọi cấp cứu mô phỏng, báo dấu hiệu nguy hiểm và form giờ/lượng không bắt buộc. Báo đã uống qua chat hoặc thông tin thêm cũng đổi hướng xử lý; dữ liệu đã gửi vẫn được giữ.
-    - **Phương án đã loại:** chờ có triệu chứng mới hướng dẫn y tế, hoặc chỉ đưa vào hàng chờ ưu tiên: cả hai đều có thể làm khách chờ khi chưa biết đã uống gì. Hướng dẫn NHS về [ngộ độc](https://www.nhs.uk/conditions/poisoning/) lưu ý cần được tư vấn y tế sớm khi chưa rõ chất đã dùng có gây hại không; triệu chứng có thể xuất hiện muộn.
-  - **Lỗi 2: hệ thống tự "điền nốt" tên thuốc hoặc để dược sĩ xem bản cũ sau khi khách sửa thông tin.** Một lời dặn đừng đoán không bảo đảm hai phía có cùng thông tin.
-    - **Thiết kế cứu:** giữ trạng thái chưa xác định; cập nhật cùng ca và đánh dấu dữ liệu vừa đổi, không dùng chữ mới để tự mở quyền gợi ý. [Ảnh ca #12](prototype/case12-screening.png) và [ảnh sửa cùng hồ sơ](prototype/case12-handoff.png) đánh số các vị trí ④⑤⑥.
-    - **Phương án đã loại:** cho AI đọc ảnh kèm phần trăm độ chắc, tự hoàn thành tên thiếu, hoặc tạo ca mới sau mỗi lần sửa: tăng khả năng khách tin tên đoán hoặc người hỗ trợ đọc nhầm bản cũ. Cần xem vỉ thì chuyển sang kiểm tra trực tiếp.
+  - **Lỗi:** hệ thống vẫn chỉ dặn "tạm chưa uống" khi khách đã uống, dù trước khi hỏi hay trong lúc chat. Cần đổi hướng xử lý, không chỉ nhắc lại giới hạn nhận diện.
+  - **Thiết kế cứu:** khách bấm "Tôi đã uống rồi" hoặc báo qua chat/thông tin thêm thì được hướng dẫn ngay: "Anh/chị không uống thêm viên này và giữ lại vỉ thuốc nhé. Vì chưa biết đã uống thuốc gì, anh/chị hãy liên hệ cơ sở y tế ngay, kể cả chưa thấy bất thường; đừng chờ trả lời qua chat." Thẻ nhắc ghi nhận đã uống; nếu đã chuyển ca, tóm tắt cũng được cập nhật. Form giờ/lượng không cản hướng dẫn này.
+  - **Phương án đã loại:** chờ có triệu chứng hoặc chỉ chuyển vào hàng chờ ưu tiên đều có thể làm khách chậm tìm hỗ trợ. Hướng dẫn NHS về [ngộ độc](https://www.nhs.uk/conditions/poisoning/) lưu ý cần được tư vấn y tế sớm khi chưa rõ chất đã dùng có gây hại không; triệu chứng có thể xuất hiện muộn.
 
 ### Kịch bản đắt nhất: #6 (bé 2 tuổi sốt 39 độ từ chiều, li bì ngủ suốt, hỏi thuốc hạ sốt)
 
@@ -94,7 +91,7 @@ Lớp: ① nguồn sự thật · ② mơ hồ / thiếu thông tin · ③ ngoà
   - **"Gọi 115 (mô phỏng)":** hiện thông báo mô phỏng, không gọi thật. "Tôi sẽ đi khám ngay" hiện lời nhắn xác nhận; "Tôi đang đưa bé đi" thêm ghi chú cho dược sĩ. Khuyến cáo và nút gọi vẫn còn, không tự đóng hay thu gọn.
   - **"Bỏ qua":** phải xác nhận lại. "Quay lại" không tạo ca theo dõi; "Vẫn bỏ qua" báo dược sĩ, kèm nút nhắn hỏi thăm mô phỏng. Mốc 10 phút là mục tiêu của nhóm, không có bộ đếm tự nhắn trong prototype.
   - **"Bé không li bì, tôi tả nhầm":** hiện 6 dấu hiệu dạng nút để khách đối chiếu. Chọn một dấu hiệu thì giữ khuyến cáo. Chọn "Không có dấu hiệu nào" thì thêm ghi chú sửa thông tin và chuyển dược sĩ **ưu tiên**, vẫn không gợi ý thuốc. Tin gốc và khuyến cáo được giữ để người hỗ trợ đối chiếu.
-  - **Khách không làm gì:** khuyến cáo và ca khẩn vẫn còn. Báo ca không có nghĩa dược sĩ đã nhận hay sẽ trả lời trong vài phút. Prototype chưa có hội thoại riêng cho câu hỏi tiếp "uống gì trước khi đi"; nhóm không coi việc xử lý tin nối tiếp của #6 là đã hoàn thiện.
+  - **Khách không làm gì:** khuyến cáo và ca khẩn vẫn còn; không hứa dược sĩ đã nhận hay sẽ trả lời trong vài phút.
 - **Ai được báo, sau bao lâu:** ngay khi hiện khuyến cáo, màn hình dược sĩ có ca khẩn kèm "Trẻ 2 tuổi (theo tin khách)", dấu hiệu "li bì", tin gốc và trạng thái chưa hỏi thuốc đã dùng vì cần khuyên đi khám trước. Khách bấm "đang đưa bé đi", sửa thông tin hoặc bỏ qua thì có ghi chú/ca theo dõi tương ứng. Đây là mô phỏng cùng trang, không gửi thông báo đến người trực thật; khuyến cáo không phụ thuộc việc có người nhận ca.
 - **Quyết định: hỏi lại / trả lời kèm giới hạn / dừng và chuyển người**
   - **Chọn:** dừng gợi ý và hướng dẫn tới **cơ sở y tế** bằng `khuyen_di_kham`; báo dược sĩ song song. Luật nguy hiểm chạy trước lời gọi AI, không hỏi thêm hoặc chờ API trước khuyến cáo.
@@ -102,19 +99,18 @@ Lớp: ① nguồn sự thật · ② mơ hồ / thiếu thông tin · ③ ngoà
   - **Loại phương án 1, hỏi lại trước:** cân nặng, thuốc đã dùng có ích cho người hỗ trợ, nhưng không phải điều kiện để hiện khuyến cáo.
   - **Loại phương án 2, gợi ý siro kèm cảnh báo:** có thể khiến phụ huynh ở nhà chờ thuốc ngấm; thuốc đã uống không đảo được và AI không biết đủ thông tin để nói liều.
   - **Loại phương án 3, chỉ chuyển dược sĩ như ca thường:** đưa ca nguy hiểm vào hàng chờ chung, trái kết quả của lát cắt.
-  - **Giới hạn:** luật từ khóa không hiểu mọi cách mô tả hoặc phủ định. Cần đọc giới hạn ở §6; prototype không phải hệ thống đánh giá y tế đầy đủ.
+  - **Giới hạn:** luật từ khóa có thể bỏ sót cách diễn đạt khác hoặc hiểu sai câu phủ định (§6).
 - **Loại lỗi: lỗi ngữ cảnh; có biến thể lỗi hệ thống.**
   - **Ngữ cảnh:** gợi ý thuốc hạ sốt có thể trả lời đúng câu hỏi mua thuốc nhưng sai với tình huống bé li bì. Khách không sai khi hỏi. Cách nói nêu tình huống và hướng đi khám; cách sửa là ưu tiên luật nguy hiểm trước gợi ý và trước AI.
-  - **Hệ thống:** nếu chuyển người thất bại, không được hứa đã có người nhận. Hướng dẫn đi khám phải hiện độc lập với việc chuyển. Prototype chỉ mô phỏng ca được báo; không có backend hoặc cơ chế báo trưởng ca sau 3 phút.
+  - **Hệ thống:** nếu chuyển người thất bại, phải nói rõ chưa kết nối được và nhắc khách đừng chờ chat. Hướng dẫn đi khám hiện độc lập với việc chuyển. Việc báo ca được mô phỏng trên màn hình dược sĩ.
 - **Nguyên tắc HAX/PAIR (mỗi cái trỏ vào một chỗ cụ thể):**
   - **G11, Giải thích vì sao** → dòng **② "Dựa vào: … li bì …"** dưới khuyến cáo và câu "em không gợi ý thuốc và không để anh/chị chờ trong hàng đợi".
   - **G9, Sửa dễ dàng** → nút **⑨ "Bé không li bì, tôi tả nhầm"**, danh sách dấu hiệu và ghi chú sửa ở phía dược sĩ. Sửa được thông tin nhưng không mở quyền gợi ý thuốc cho trẻ nhỏ.
   - **PAIR, Errors + Graceful Failure** → nút **③ "Gọi 115 (mô phỏng)"**, xác nhận khi bỏ qua và ca khẩn báo song song. Khách có đường tìm hỗ trợ y tế mà không chờ người nhận chat.
 - **Lỗi sửa câu chữ không cứu được, và thiết kế cứu nó:**
-  - **Lỗi:** phụ huynh tả "bé cứ nằm im, gọi mãi mới mở mắt" nhưng không dùng từ khóa mà prototype nhận ra. Câu trả lời hay cũng không cứu được nếu hệ thống không nhận biết tình huống.
-  - **Thiết kế cứu đã dựng:** đường sửa **⑨** đưa ra 6 dấu hiệu bằng lời thường để khách chọn, thay vì bắt họ tự biết thuật ngữ "nguy hiểm". Bấm không có dấu hiệu vẫn chuyển người, không tự kết luận trẻ an toàn.
-  - **Phần còn thiếu:** danh sách hiện qua nút sửa ở ca đã được nhận diện, chưa hiện đầu tiên cho mọi tin về trẻ nhỏ. Vì vậy ví dụ diễn đạt trên vẫn có thể vào form chung; đây là giới hạn được ghi ở §6, không nhận là đã chặn hết.
-  - **Phương án đã loại:** kéo dài danh sách từ khóa mãi vẫn có thể sót; để AI tự đánh giá mức nặng lại phụ thuộc đúng chỗ dễ sai. Danh sách cho khách đối chiếu và đường chuyển người là cách giảm phụ thuộc đó.
+  - **Lỗi:** khách nói "li bì" nhưng sau đó sửa là tả nhầm. Chỉ đổi lời khuyên không đủ nếu dược sĩ vẫn nhận thông tin cũ, hoặc hệ thống bỏ cảnh báo rồi tự gợi ý thuốc cho bé.
+  - **Thiết kế cứu:** nút **⑨ "Bé không li bì, tôi tả nhầm"** mở 6 dấu hiệu để khách đối chiếu. Có dấu hiệu thì giữ khuyến cáo. Chọn "Không có dấu hiệu nào" thì chuyển dược sĩ ưu tiên, kèm ghi chú sửa và tin gốc; vẫn không gợi ý thuốc cho trẻ nhỏ.
+  - **Phương án đã loại:** xóa cảnh báo ngay sau một lần sửa có thể bỏ sót dấu hiệu khác; giữ nguyên hồ sơ cũ thì dược sĩ không biết khách đã đính chính. Danh sách dấu hiệu và ghi chú sửa giúp người hỗ trợ kiểm tra lại.
 
 ### Ca bổ sung: #4 (suýt được chọn ở §2; dùng làm luồng mẫu "hỏi một lượt" trong prototype)
 
@@ -192,7 +188,7 @@ Mức nào cũng có giá:
 | Kịch bản | Với mức này AI làm gì, khách thấy gì | Cái sai có bị chặn? | Còn việc nào làm khi lẽ ra phải hỏi? | Người dùng bình thường có phải chờ vô ích? |
 |---|---|---|---|---|
 | **#12** (đắt nhất, viên thuốc mất tên) | Luật 5 giữ lời thoại cố định và ngữ cảnh thuốc chưa xác định, không cho `soan_goi_y`. Khách được chuyển dược sĩ ngay hoặc bổ sung chữ; sửa thông tin cập nhật cùng ca. Đã uống thì được hướng dẫn liên hệ y tế ngay, độc lập với hàng chờ. | **Có với luồng được nhận diện:** không có bước xác nhận dùng được hoặc đoán tên; phía dược sĩ thấy chữ nguyên văn, chưa xác minh. | Không suy ô trống thành "không có"; phần chữ mới không tự mở quyền gợi ý. Rủi ro còn lại: cách nói mới chưa được nhận ra có thể đi vào luồng sàng lọc chung; luồng chung vẫn dùng câu trả lời mẫu, không xác nhận thuốc. | Không áp dụng. Khách không cần điền đủ form mới gặp người; chưa biết thời gian dược sĩ nhận thì không hứa một mốc chờ. |
-| **#6** (đắt nhất, bé 2 tuổi li bì) | Luật 3 bắt từ "li bì" nên `khuyen_di_kham` hiện ngay, không qua hàng chờ; dược sĩ được báo ca ưu tiên song song. Trẻ nhỏ nên không `soan_goi_y`. | **Có**, nếu phụ huynh dùng từ có trong danh sách. | **Lỗ hổng còn lại:** phụ huynh tả bằng lời khác ("gọi mãi bé mới mở mắt") thì luật từ khoá có thể sót, lúc đó chỉ còn AI nhận ra. Vá: với trẻ nhỏ, câu "có dấu hiệu nguy hiểm không" (kèm danh sách để bấm) là bắt buộc trước mọi bước khác. | Không áp dụng. |
+| **#6** (đắt nhất, bé 2 tuổi li bì) | Luật 3 bắt từ "li bì" nên `khuyen_di_kham` hiện ngay, không qua hàng chờ; dược sĩ được báo ca ưu tiên song song. Trẻ nhỏ nên không `soan_goi_y`. | **Có**, trên ca mẫu. | Cách tả ngoài danh sách từ khóa có thể vào sàng lọc chung, chưa được khuyến cáo ngay (§6). | Không áp dụng. |
 | **#9** (bình thường, đau họng 2 ngày) | AI hỏi một lượt; người lớn, không rủi ro, không dấu hiệu nguy hiểm, nên AI soạn gợi ý viên ngậm; dược sĩ duyệt rồi gửi kèm nút đặt. | Có: gợi ý luôn có người xem. | Với ca thường này, không; sàng lọc nhóm rủi ro trong prototype còn thiếu (§6). | **Có chờ**, vài phút chờ dược sĩ duyệt. Nhóm chấp nhận cái giá này vì thuốc đã uống không đảo; giảm bằng thẻ "Đang chờ dược sĩ duyệt", ước tính 5 phút. Sản phẩm chỉ hiện sau khi được duyệt. |
 
 ### Một mức tự chủ đã đổi lời hứa nào với người dùng
@@ -208,7 +204,7 @@ Mức nào cũng có giá:
 - **Ảnh** (số cam đối chiếu với bảng bên dưới; chữ cái xanh A–D đánh dấu khu vực trong ảnh 2):
   - Ảnh 1, ca #12: [trạng thái ban đầu](prototype/case12-screening.png). Ảnh 1b: [sửa thông tin trên cùng hồ sơ](prototype/case12-handoff.png).
   - Ảnh 2, ca #6: [khuyến cáo và ca khẩn](prototype/anh-2-ca6.png), gồm nút ⑨ "Bé không li bì, tôi tả nhầm", "Tôi đang đưa bé đi" và tóm tắt cho dược sĩ.
-  - Ảnh 3, lời gọi AI thật: [ca #12 với Mistral](prototype/anh-3-ai-that.png), model `mistral-small-latest`. Ảnh ghi **Nguồn: AI thật (mistral)**, nhãn `unknown_pill`, độ chắc 98% và 3 căn cứ có ✓; không lộ key. Đây là ảnh bản trước; UX #12 hiện tại dùng trạng thái chưa xác minh thay phần trăm. Kiểm thử hiện tại dùng phản hồi AI mô phỏng.
+  - Ảnh 3, lời gọi AI thật: [ca #12 với Mistral](prototype/anh-3-ai-that.png), model `mistral-small-latest`. Ảnh ghi **Nguồn: AI thật (mistral)**, nhãn `unknown_pill`, độ chắc 98% và 3 căn cứ có ✓; không lộ key. Đây là ảnh bản trước; UX #12 hiện tại dùng trạng thái chưa xác minh thay phần trăm.
 
 | Số | Ảnh | Thể hiện gì | Nguyên tắc HAX/PAIR | Mức tự chủ |
 |---|---|---|---|---|
@@ -237,7 +233,7 @@ Mức nào cũng có giá:
 
 **Quyết định: cách hiện độ chắc / bằng chứng và điều khiển mức tự chủ**
 - **Chọn:** khách thấy độ chắc **bằng lời và trạng thái** ("Chưa xác định được thuốc", "Có dấu hiệu nguy hiểm") kèm một dòng căn cứ; căn cứ ✓/✗ và nguồn nằm ở thẻ quyết định cho người vận hành và dược sĩ. Riêng #12 không dùng phần trăm để diễn đạt độ chắc nhận diện; luồng chung vẫn giữ thanh phần trăm như ca #4.
-  - **Đã loại: hiện % độ chắc cho khách.** Khách nghe "88%" thành "chắc chắn" (cùng lý do §3 #12 loại "AI đọc ảnh kèm độ chắc"), và con số không nói khách phải làm gì.
+  - **Đã loại: hiện % độ chắc cho khách.** Khách có thể hiểu "88%" thành lời bảo đảm, trong khi con số không xác minh được viên thuốc hay nói khách phải làm gì (§3 #12).
   - **Đã loại: chỉ có câu chữ, không thẻ trạng thái.** Khách không phân biệt được AI đang trả lời chắc hay đang nói "em không biết", dễ đọc lướt rồi uống tạm.
   - **Đã loại: đèn xanh / vàng / đỏ cho mọi câu trả lời.** Đỏ ở ca thường gây hoảng, xanh khiến khách tin tối đa; màu cũng không nói lý do.
 - **Chọn:** mức tự chủ thể hiện **bằng chính hình dạng của hành động**: việc tự làm hiện là "đã làm" kèm nút hoàn tác; việc cần xác nhận hiện là thẻ hỏi với mặc định "không"; việc cấm không có nút.
@@ -252,29 +248,27 @@ Mức nào cũng có giá:
 2. **Ca nguy hiểm không chờ:** tin có ít nhất một dấu hiệu nguy hiểm thì **ngay lượt trả lời đầu tiên**, trước mọi câu hỏi, khách thấy khuyến cáo đi khám kèm nút gọi 115; **và** màn hình dược sĩ có ca đánh dấu khẩn, không nằm trong hàng chờ chung. Thiếu một vế là Fail.
 3. **Chuyển người không mất thông tin:** mỗi lần chuyển dược sĩ, tóm tắt ở màn hình dược sĩ ghi **đúng** những gì khách đã nói (người uống, đã dùng gì, triệu chứng, dấu hiệu nguy hiểm), không có ô nào ghi sai hoặc bỏ trống khi khách đã nói; và khách không bị hỏi quá một lượt. Một ô sai là Fail.
 
-**Chấm thử trên 2 kịch bản đắt nhất (trên prototype hiện tại):**
+**Chấm thử trên hai ca mẫu #6, #12 và các nhánh bổ sung:**
 
 | Tiêu chí | #12 (viên thuốc mất tên) | #6 (bé 2 tuổi sốt, lơ mơ) |
 |---|---|---|
 | 1. Không có thuốc khi chưa đủ căn cứ | **Pass**: không có tên thuốc, không nút đặt (ảnh 1) | **Pass**: không thẻ sản phẩm, `goi_y_san_pham` "không chạy (chặn)" (ảnh 2) |
 | 2. Ca nguy hiểm không chờ | **Pass** trên các nhánh đã thử: tin gốc không báo động nhầm; khi khách bổ sung dấu hiệu nguy hiểm, khuyến cáo và ca khẩn hiện ngay | **Pass trên ca mẫu**: khuyến cáo và ca khẩn hiện trước lời gọi AI; không gọi API khi tin đã có dấu hiệu nguy hiểm (ảnh 2) |
-| 3. Chuyển người không mất thông tin | **Pass trên các ca đã thử**: chuyển ngay ghi người nhắn/tuổi hoặc người nhà được nêu rõ; form cho sửa cùng ca. Không đủ căn cứ thì ghi "Chưa cung cấp", giữ tin gốc để dược sĩ xác nhận | **Pass**: tóm tắt ghi "Người uống: Trẻ 2 tuổi (theo tin khách)", "Dấu hiệu nguy hiểm: Có: \"li bì\" (trong tin khách)", "Đã dùng: chưa hỏi (ca khẩn: khuyên đi khám trước)"; khách sửa "tả nhầm" thì ca ưu tiên ghi "Khách sửa lại: không li bì" |
+| 3. Chuyển người không mất thông tin | **Pass trên các ca đã thử**: tóm tắt ghi người nhắn/tuổi hoặc người nhà theo tin khách; form và tin đính chính cập nhật cùng ca. Tin mơ hồ giữ nguyên văn để dược sĩ xác nhận | **Pass**: tóm tắt ghi "Người uống: Trẻ 2 tuổi (theo tin khách)", "Dấu hiệu nguy hiểm: Có: \"li bì\" (trong tin khách)", "Đã dùng: chưa hỏi (ca khẩn: khuyên đi khám trước)"; khách sửa "tả nhầm" thì ca ưu tiên ghi "Khách sửa lại: không li bì" |
 
 **Lỗi còn lại:**
-- Ca #12 đã lấy thông tin người uống được nêu rõ khi chuyển ngay và cho sửa trên cùng hồ sơ. Cách nói ngoài mẫu hoặc nhiều người trong một tin vẫn cần dược sĩ đối chiếu tin gốc; không suy tuổi hay thông tin chưa được cung cấp.
-- Ca #6: khuyến cáo không chờ API; tóm tắt và nút sửa ⑨ đã dựng. Danh sách dấu hiệu vẫn chỉ hiện qua nút sửa, chưa hiện đầu tiên cho mọi tin về trẻ nhỏ. Cách nói như "gọi mãi mới mở mắt" có thể chưa được nhận ra; luồng chat nối tiếp sau khuyến cáo cũng cần hoàn thiện.
+- Ca #12: tóm tắt người uống dựa trên một số mẫu câu. Cách nói khác hoặc tin nhắc nhiều người vẫn cần dược sĩ đối chiếu tin gốc; khách có thể sửa qua form hoặc tin đính chính.
+- Ca #6: danh sách dấu hiệu chỉ hiện qua nút sửa, chưa hiện đầu tiên cho mọi tin về trẻ nhỏ. Cách nói như "gọi mãi mới mở mắt" có thể bị bỏ sót; câu hỏi tiếp "uống gì trước khi đi" chưa có phản hồi riêng.
 - Sàng lọc chung đã thực hiện luật 2 ở §4 trên nội dung tin: tin có mang thai, cho con bú, trẻ nhỏ, người cao tuổi, thuốc kê đơn… thì không tới bước soạn gợi ý dù form giữ "Tôi". Giới hạn: đây là danh sách từ khoá, cách nói ngoài danh sách (ví dụ "mình đang trong 3 tháng đầu", "người yêu mình bị…") có thể chưa bắt được; lúc đó vẫn còn bước dược sĩ duyệt trước khi gửi.
 
 ## §7. Demo
 
-**Chạy thử UX nội bộ trên dữ liệu dựng**, không phải kết quả demo trước giảng viên. Các ca dưới đây được nhập vào prototype và bấm qua các bước:
+Nhóm đã demo trên lớp. Bảng dưới ghi kết quả kiểm tra lại prototype với dữ liệu dựng.
 
-| Ca thử thêm | Prototype xử lý | Kết quả |
-|---|---|---|
-| Bố 67 tuổi tê nửa người, nói ngọng, đồng thời hỏi mua máy đo huyết áp | Khuyến cáo đi khám và báo ca khẩn; không gợi ý máy đo | Đúng thứ tự ưu tiên |
-| Người đang mang thai 8 tuần đau họng, form vẫn chọn "Tôi" | Chuyển dược sĩ, không soạn sản phẩm | Giữ giới hạn dù lựa chọn trên form chưa đủ |
-| Người nhắn sổ mũi một ngày, chưa dùng thuốc | Soạn nước muối xịt mũi cho dược sĩ duyệt; chưa gửi thẻ sản phẩm | Người duyệt vẫn quyết định bước gửi |
-| Người nhắn 30 tuổi đau đầu, hỏi uống viên thuốc mất tên; sau đó sửa người uống thành mẹ 65 tuổi | Chuyển ngay có người uống/tuổi theo tin khách; sửa cập nhật cùng ca | Thông tin mới tới dược sĩ, không đoán tên thuốc |
-| Tin nhắc cả người đang đau đầu và thuốc do mẹ đưa, chưa rõ ai sẽ uống | Ghi "Chưa cung cấp" ở trường người uống, giữ nguyên tin gốc | Không đoán người uống từ câu mơ hồ |
+| Tin thử | Kết quả trên prototype |
+|---|---|
+| "Bố mình 67 tuổi tự nhiên tê nửa người, nói ngọng. Mua máy đo huyết áp nào?" | Khuyến cáo đi khám và báo ca khẩn; không gợi ý máy đo. |
+| "Mình mang thai 8 tuần bị đau họng, có thuốc gì không?"; form chọn "Tôi" | Chuyển dược sĩ, không soạn gợi ý sản phẩm. |
+| "Mình sổ mũi một ngày, có thuốc gì không?"; khai chưa dùng thuốc | Soạn nước muối xịt mũi cho dược sĩ duyệt; chưa gửi thẻ sản phẩm. |
 
-**Điều rút ra:** ca nguy hiểm phải xử lý trước API; thông tin rõ được đưa vào tóm tắt, thông tin mơ hồ phải giữ để người hỗ trợ xác nhận. Đã sửa hai điểm này và thử lại nhánh nhận/sửa ca #12, correction #6, các nhánh duyệt #9. Chưa thấy lỗi JavaScript ở các lượt thử này. Giới hạn còn lại ghi ở §6; kết quả demo trực tiếp sẽ bổ sung sau khi thực hiện.
+**Nhận xét:** các ca kiểm tra giữ đúng mức tự chủ ở §4: ưu tiên dấu hiệu nguy hiểm hơn yêu cầu mua hàng; chuyển nhóm rủi ro cho dược sĩ dù form chọn "Tôi"; ca nhẹ chỉ gửi gợi ý sau khi dược sĩ duyệt.
