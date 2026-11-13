@@ -1,11 +1,5 @@
-# Dàn ý bài nộp *(spec.md — nộp trước 23:59 ngày lab của lớp)*
-
-> Copy dàn ý này vào `spec.md` của nhóm. Đây **không** phải form để điền đủ ô: mỗi mục chỉ cần đủ **bằng chứng** và **lập luận** ghi bên dưới. Viết ngắn, gạch đầu dòng là được. Hướng dẫn từng chặng: `02-guide.md`. Cách chấm: `04-rubric.md`.
->
-> **Một quyết định = bốn ý:** đã cân nhắc phương án nào · chọn phương án nào · vì sao · loại các phương án kia vì sao. Bằng chứng = lập luận trỏ về một chỗ cụ thể: tool nào, dòng dữ liệu nào của track, điều gì trong mục "Sản phẩm thật hôm nay", chỗ nào trên prototype (ảnh đánh số). Không chạy agent.
-
 # Bài nộp LAB5 — T1 Y tế · Nhóm ABC
-**Lớp:** L3B · **Bàn / zone:** ____ · **Track:** T1 Y tế
+**Lớp:** L3B · **Bàn:** 2 · **Zone:** 1 · **Track:** T1 Y tế
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
