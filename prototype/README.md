@@ -29,6 +29,6 @@ Ca #12 chỉ nhận chữ khách gõ; không gửi ảnh hay nhận diện thu�
 
 ## AI thật (bonus)
 
-Mở mục "Cấu hình AI thật", chọn Mistral (mặc định, model `mistral-small-latest`), Groq hoặc OpenRouter, dán API key, bật ô "Dùng AI thật". AI phân loại `ask / unknown_pill / soan_goi_y / khuyen_di_kham / chuyen_duoc_si` và trả độ chắc + căn cứ; câu chữ khách thấy là mẫu đã duyệt, không do AI viết. Key chỉ nằm trong bộ nhớ tab, không lưu, không commit. Không bật hoặc gọi lỗi thì tự dùng luật mô phỏng.
+Mở mục "Cấu hình AI thật", chọn Mistral (mặc định, model `mistral-small-latest`), Groq hoặc OpenRouter, dán API key, bật ô "Dùng AI thật". AI phân loại `ask / unknown_pill / phan_ung / luu_ghi_chu / no_source / soan_goi_y / khuyen_di_kham / chuyen_duoc_si` và trả độ chắc + căn cứ; câu chữ khách thấy là mẫu đã duyệt, không do AI viết. Key chỉ nằm trong bộ nhớ tab, không lưu, không commit. Không bật hoặc gọi lỗi thì tự dùng luật mô phỏng.
 
 Ca #12 có thể gọi AI thật để phân loại ở lượt đầu, nhưng chốt chặn giữ trạng thái thuốc chưa xác minh và dùng lời thoại cố định. Các tin nối tiếp giữ cùng ngữ cảnh. Đã uống hoặc có dấu hiệu nguy hiểm thì hướng dẫn ngay, không chờ API. Không bật AI vẫn demo được đầy đủ; ảnh AI thật là bằng chứng của một lần chạy riêng, không phải mọi lượt đều gọi AI.

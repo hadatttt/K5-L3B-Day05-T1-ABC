@@ -23,6 +23,7 @@ main{max-width:1280px;margin:12px auto;padding:0 16px;display:grid;grid-template
 @media(max-width:1000px){main{grid-template-columns:1fr}main.pill-mode{grid-template-columns:minmax(0,1fr)}.pill-mode td{overflow-wrap:anywhere}.pill-mode .lvl{white-space:normal}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
 .phone{padding:0;overflow:hidden;display:flex;flex-direction:column;height:690px}
+.pill-mode .phone{height:800px}
 .phone .top{background:var(--brand);color:#fff;padding:10px 12px;font-weight:600}
 .phone .top small{display:block;font-weight:400;opacity:.85}
 .pill-notice{padding:9px 12px;background:#fff7df;border-bottom:1px solid var(--amber);color:#624a11;font-size:13px}
@@ -351,6 +352,10 @@ async function decide(stage, fullText){
     }
     if (S.pill.taken) { pillTaken(); return {decision:'handled'}; }
   }
+  if ((!S.pill && DANGER.test(fullText)) || (S.answers && S.answers.danger === 'co')) {
+    const r = guard(decideRules(stage, fullText), stage, fullText, 'Luật ưu tiên dấu hiệu nguy hiểm');
+    renderAI(r); return r;
+  }
   let raw, source;
   if ($('#useAI').checked) {
     try { raw = await callLLM(stage, fullText); source = 'AI thật (' + provider + ')'; }
@@ -416,8 +421,17 @@ function pillHasDanger(text){
   const denied = new RegExp('(?:không|chưa)(?: có| bị| thấy| hề)?\\s+' + sign + '(?:\\s+(?:hay|hoặc|và)\\s+' + sign + ')*', 'gi');
   return DANGER.test(text.replace(denied, ''));
 }
+function pillWhoFromText(text){
+  const explicit = text.match(/người (?:uống|dùng) (?:thuốc )?là\s+(.+)/i); if (explicit) text = explicit[1];
+  const self = /(?<!\p{L})(?:tôi|mình|em)\s+(?:(?:đang|bị|vừa|đã)\s+)?(?:đau|uống)/iu.test(text);
+  const known = whoFromText(text); if (known !== 'chưa rõ') return self ? '' : known;
+  const age = text.match(/(?<!\p{L})(?:tôi|mình|em),?\s+(?:năm nay\s+)?(\d{1,3})\s*tuổi/iu);
+  if (age) return 'Tôi, ' + age[1] + ' tuổi (theo tin khách)';
+  if (self) return 'Người nhắn (theo tin khách, chưa rõ tuổi)';
+  return '';
+}
 function startPill(){
-  if (!S.pill) { S.answers = null; S.pill = {read:'', who:'', notes:'', taken:null, when:'', amount:'', danger:'', caseId:null}; }
+  if (!S.pill) { S.answers = null; S.pill = {read:'', who:pillWhoFromText(S.text1), notes:'', taken:null, when:'', amount:'', danger:'', caseId:null}; }
 }
 function pillNotice(){
   const n = $('#pillNotice'), taken = S.pill.taken === true, danger = !!S.pill.danger;
@@ -523,6 +537,8 @@ function showPillHandoff(){
 function onPillMessage(text){
   lockPill();
   S.text1 += '\nKhách nhắn thêm: ' + text;
+  const who = pillWhoFromText(text);
+  if (who && (!S.pill.who || /người (uống|dùng) (?:thuốc )?là|(?:nhầm|sửa lại|đính chính)/i.test(text))) S.pill.who = who;
   const taken = pillHasTaken(text);
   if (taken) { S.pill.taken = true; pillNotice(); }
   if (pillHasDanger(text)) {
