@@ -132,7 +132,7 @@ Lớp: ① nguồn sự thật · ② mơ hồ / thiếu thông tin · ③ ngoà
   - **Thiết kế cứu:** khi người uống là **trẻ dưới 5 tuổi** (hoặc thuộc nhóm rủi ro), thứ hiện đầu tiên là **danh sách dấu hiệu dạng nút bấm**, viết bằng lời thường: "gọi khó dậy, li bì" · "thở nhanh, thở rút lõm ngực" · "co giật" · "bỏ bú, không uống được" · "tím tái" · "sốt từ 39 độ trở lên" · "Không có dấu hiệu nào". Bấm bất kỳ dấu hiệu nào thì `khuyen_di_kham` ngay. Khách nhìn danh sách và tự nhận ra, không phụ thuộc vào cách họ tả hay vào AI hiểu.
   - **Phương án đã loại:** (a) mở rộng danh sách từ khoá mãi: luôn sót cách nói mới, và càng rộng càng báo động nhầm; (b) để AI tự đánh giá mức nặng từ mô tả: đó chính là chỗ không tin được; (c) hỏi dạng câu mở "bé có dấu hiệu gì nguy hiểm không?": phụ huynh không biết dấu hiệu nào là nguy hiểm.
 
-### Ca bổ sung: #4 (suýt được chọn; giữ lại vì prototype đang bấm được ca này, và để so loại lỗi với #12)
+### Ca đắt nhất: #4
 
 - **AI nói gì (nguyên văn):**
   > "Em rất tiếc là anh/chị đã mệt mấy ngày nay. Kháng sinh cần bác sĩ khám trực tiếp mới kê được, nên em không kê hay bán loại này qua chat ạ. Để dược sĩ hỗ trợ nhanh hơn, anh/chị cho em biết giúp 3 điều: (1) người sẽ uống thuốc là anh/chị hay người nhà? (2) mấy ngày nay đã uống những thuốc gì? (3) hiện có khó thở, đau ngực, sốt rất cao hoặc lơ mơ không? Nếu có bất kỳ dấu hiệu nào ở câu (3), anh/chị hãy đến cơ sở y tế gần nhất ngay ạ."
