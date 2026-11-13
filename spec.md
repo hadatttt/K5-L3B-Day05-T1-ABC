@@ -9,9 +9,9 @@
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
 |---|---|---|
-| Công [điền họ tên đủ] |  | §1 Lát cắt & phạm vi; §3 kịch bản đắt nhất #12 (viên thuốc mất tên); dựng prototype. Demo: phần lát cắt + bấm prototype ca #12 |
+| Võ Trần Công | 2A202604026 | §1 Lát cắt & phạm vi; §3 kịch bản đắt nhất #12 (viên thuốc mất tên); dựng prototype. Demo: phần lát cắt + bấm prototype ca #12 |
 | Hà Văn Khánh Đạt | 2A202604074 | §2 Kịch bản rủi ro (14 kịch bản, chọn 2 kịch bản đắt nhất), §4 Mức tự chủ (mức 5 tool, tách bước `goi_y_san_pham`, thử trên 3 kịch bản); §3 kịch bản đắt nhất #6 (bé 2 tuổi li bì). Demo: bấm ca #6 (ca bắt buộc của track) + mức tự chủ và cái giá khi sai |
-|  |  | §5 Prototype (ảnh đánh số, lập luận cách hiện); §6 Tốt là gì; kịch bản demo. Demo: trả lời ca lạ |
+| Nguyễn Đức Khương Lam | 2A202604020 | §5 Prototype (ảnh đánh số, lập luận cách hiện); §6 Tốt là gì; kịch bản demo. Demo: trả lời ca lạ |
 
 ## §1. Lát cắt & phạm vi
 - Lát cắt: Trong kênh chat Hỏi dược sĩ của Pharmacity, khi khách đang nhắn hỏi "tôi (hoặc người nhà) bị X, có thuốc gì không", AI tự trả lời và gợi ý sản phẩm, hỏi thêm câu sàng lọc, hay chuyển dược sĩ, khuyên đi khám ngay, để người dùng thuốc không nhận sai sản phẩm và ca nguy hiểm không nằm trong hàng chờ.
