@@ -190,8 +190,8 @@ Mức nào cũng có giá:
 
 | Phương án | Ai chọn | Cái giá (trỏ về §2) |
 |---|---|---|
-| **Tự làm** (sau khi sàng lọc xong) | [điền tên] | Nhanh cho ca thường #9 và ca nửa đêm. Nhưng sàng lọc dựa trên lời khách: ở #6 khách không nói cân nặng, ở #7 dữ liệu không có thông tin thai kỳ, ở #5 khách khai bừa cho xong. Sai một lần là thuốc đã uống, không đảo. |
-| **Cấm** (mọi câu "có thuốc gì" đều chuyển dược sĩ) | [điền tên] | An toàn nhất, nhưng bỏ mất giá trị chính của lát cắt ("AI tự trả lời và gợi ý sản phẩm"), dồn hết ca vào hàng chờ khiến ca nguy hiểm khó nổi lên, và khách #9 có thể tự ra tiệm mua không ai hỏi gì. |
+| **Tự làm** (sau khi sàng lọc xong) | Công  | Nhanh cho ca thường #9 và ca nửa đêm. Nhưng sàng lọc dựa trên lời khách: ở #6 khách không nói cân nặng, ở #7 dữ liệu không có thông tin thai kỳ, ở #5 khách khai bừa cho xong. Sai một lần là thuốc đã uống, không đảo. |
+| **Cấm** (mọi câu "có thuốc gì" đều chuyển dược sĩ) | Lam | An toàn nhất, nhưng bỏ mất giá trị chính của lát cắt ("AI tự trả lời và gợi ý sản phẩm"), dồn hết ca vào hàng chờ khiến ca nguy hiểm khó nổi lên, và khách #9 có thể tự ra tiệm mua không ai hỏi gì. |
 | **Cần dược sĩ duyệt, AI soạn sẵn** | Đạt | Khách ca thường chờ thêm vài phút (#9); dược sĩ có thêm việc. Đổi lại: không gợi ý thuốc nào tới khách mà chưa có người xem, và dược sĩ chỉ bấm duyệt trên tóm tắt có sẵn chứ không phải hỏi lại từ đầu. |
 
 **Nhóm chốt:** cần dược sĩ duyệt, tách 2 bước, cộng ngoại lệ hàng không phải thuốc. Lý do: theo bối cảnh track, sai là hại sức khoẻ và không đảo được, còn chờ dược sĩ "chỉ tốn vài phút". Ngoại lệ hàng không phải thuốc giữ lại tốc độ cho các ca như #8 (nước muối), nơi gợi ý sai cũng không hại sức khoẻ.
