@@ -85,8 +85,8 @@ code{font-size:12.5px;background:var(--ai);padding:0 4px;border-radius:4px}
     <summary>Cấu hình AI thật (bonus, không bắt buộc)</summary>
     <div class="row">
       <label><input type="checkbox" id="useAI"> Dùng AI thật cho quyết định chính</label>
-      <select id="prov"><option value="groq">Groq</option><option value="openrouter">OpenRouter</option></select>
-      <input id="model" size="34" value="llama-3.3-70b-versatile" aria-label="Model">
+      <select id="prov"><option value="mistral">Mistral</option><option value="groq">Groq</option><option value="openrouter">OpenRouter</option></select>
+      <input id="model" size="34" value="mistral-small-latest" aria-label="Model">
       <input id="key" type="password" size="30" placeholder="API key (chỉ giữ trong trang này)" autocomplete="off" aria-label="API key">
     </div>
     <div class="note">Key chỉ nằm trong bộ nhớ của tab này: không lưu, không ghi vào file, không commit. Chỉ gửi nội dung dựng. Nếu không bật hoặc gọi lỗi, prototype tự dùng luật mô phỏng để vẫn bấm được.</div>
@@ -208,7 +208,7 @@ function decideRules(stage, fullText){
 async function callLLM(stage, text){
   const prov = $('#prov').value, key = $('#key').value.trim(), model = $('#model').value.trim();
   if (!key) throw new Error('chưa nhập key');
-  const url = prov==='groq' ? 'https://api.groq.com/openai/v1/chat/completions' : 'https://openrouter.ai/api/v1/chat/completions';
+  const url = {mistral:'https://api.mistral.ai/v1/chat/completions', groq:'https://api.groq.com/openai/v1/chat/completions', openrouter:'https://openrouter.ai/api/v1/chat/completions'}[prov];
   const sys = 'Bạn là bộ phân loại an toàn cho kênh chat "Hỏi dược sĩ" của một nhà thuốc (dữ liệu dựng cho bài học). KHÔNG tư vấn thuốc, KHÔNG nói liều. Chỉ chọn MỘT quyết định:\n'
    + '- "ask": khách chưa nói rõ người uống thuốc là ai, đã dùng thuốc gì, có dấu hiệu nguy hiểm không, và chưa tỏ ra khó chịu khi bị hỏi (chỉ hợp lệ khi stage=start).\n'
    + '- "unknown_pill": khách hỏi có nên uống một viên thuốc không rõ tên (mất tên, chỉ mô tả màu sắc/hình dạng) (chỉ hợp lệ khi stage=start). TUYỆT ĐỐI không đoán tên thuốc.\n'
@@ -435,7 +435,7 @@ document.addEventListener('click', async e => {
 });
 $('#send').addEventListener('click', onSend);
 $('#msg').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); onSend(); } });
-$('#prov').addEventListener('change', () => { $('#model').value = $('#prov').value === 'groq' ? 'llama-3.3-70b-versatile' : 'meta-llama/llama-3.3-70b-instruct'; });
+$('#prov').addEventListener('change', () => { $('#model').value = {mistral:'mistral-small-latest', groq:'llama-3.3-70b-versatile', openrouter:'meta-llama/llama-3.3-70b-instruct'}[$('#prov').value]; });
 reset();
 $('#msg').value = SAMPLES.k4;
 </script>

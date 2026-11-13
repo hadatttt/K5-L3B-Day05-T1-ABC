@@ -8,6 +8,6 @@ Mở `index.html` bằng trình duyệt, không cần cài gì. Toàn bộ dữ 
 
 ## AI thật (bonus)
 
-Mở mục "Cấu hình AI thật", chọn Groq hoặc OpenRouter, dán API key, bật ô "Dùng AI thật". AI quyết định `ask / khuyen_di_kham / chuyen_duoc_si` và trả độ chắc + căn cứ; câu chữ khách thấy là mẫu đã duyệt, không do AI viết. Key chỉ nằm trong bộ nhớ tab, không lưu, không commit. Không bật hoặc gọi lỗi thì tự dùng luật mô phỏng.
+Mở mục "Cấu hình AI thật", chọn Mistral (mặc định, model `mistral-small-latest`), Groq hoặc OpenRouter, dán API key, bật ô "Dùng AI thật". AI quyết định `ask / khuyen_di_kham / chuyen_duoc_si` và trả độ chắc + căn cứ; câu chữ khách thấy là mẫu đã duyệt, không do AI viết. Key chỉ nằm trong bộ nhớ tab, không lưu, không commit. Không bật hoặc gọi lỗi thì tự dùng luật mô phỏng.
 
 Chụp 1–2 ảnh màn hình có số cam, lưu vào thư mục này để §5 của spec trỏ vào.

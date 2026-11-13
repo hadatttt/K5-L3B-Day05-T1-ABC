@@ -11,7 +11,7 @@
 |---|---|---|
 | Võ Trần Công | 2A202604026 | §1 Lát cắt & phạm vi; §3 kịch bản đắt nhất #12 (viên thuốc mất tên); dựng prototype. Demo: phần lát cắt + bấm prototype ca #12 |
 | Hà Văn Khánh Đạt | 2A202604074 | §2 Kịch bản rủi ro (14 kịch bản, chọn 2 kịch bản đắt nhất), §4 Mức tự chủ (mức 5 tool, tách bước `goi_y_san_pham`, thử trên 3 kịch bản); §3 kịch bản đắt nhất #6 (bé 2 tuổi li bì). Demo: bấm ca #6 (ca bắt buộc của track) + mức tự chủ và cái giá khi sai |
-| Nguyễn Đức Khương Lam | 2A202604020 | §5 Prototype (ảnh đánh số, lập luận cách hiện); §6 Tốt là gì; kịch bản demo. Demo: trả lời ca lạ |
+| Nguyễn Đức Khương Lam | 2A202604020 | §5 Prototype (ảnh đánh số, lập luận cách hiện) và §6 Tốt là gì (làm cùng Đạt); kịch bản demo. Demo: trả lời ca lạ |
 
 ## §1. Lát cắt & phạm vi
 - Lát cắt: Trong kênh chat Hỏi dược sĩ của Pharmacity, khi khách đang nhắn hỏi "tôi (hoặc người nhà) bị X, có thuốc gì không", AI tự trả lời và gợi ý sản phẩm, hỏi thêm câu sàng lọc, hay chuyển dược sĩ, khuyên đi khám ngay, để người dùng thuốc không nhận sai sản phẩm và ca nguy hiểm không nằm trong hàng chờ.
@@ -216,12 +216,65 @@ Mức nào cũng có giá:
 Đặt `goi_y_san_pham` ở mức cần dược sĩ duyệt đổi lời hứa từ **"AI tư vấn thuốc cho bạn ngay lập tức"** thành **"AI hỏi giúp và soạn sẵn, mọi gợi ý thuốc đều có dược sĩ xem trước khi tới tay bạn"**. Sản phẩm không còn hứa trả lời tức thì cho câu "có thuốc gì không"; nó hứa an toàn và không bắt khách kể lại từ đầu. Vì vậy trên màn hình, gợi ý thuốc phải có nhãn "Dược sĩ đã duyệt", và khi đang chờ thì nói rõ đang chờ ai, khoảng bao lâu. Ngược lại, `khuyen_di_kham` ở mức tự làm giữ lời hứa "ca nguy hiểm không phải chờ".
 
 ## §5. Prototype  (chặng 5)
-- Link hoặc file · công cụ · phần nào mock · có lời gọi AI thật không.
-- 1–2 ảnh có đánh số; mỗi số: thể hiện gì · nguyên tắc HAX/PAIR nào · mức tự chủ nào.
-- Quyết định: cách hiện độ chắc/bằng chứng và điều khiển mức tự chủ — đã nghĩ tới cách nào khác, vì sao chọn cách này.
 
-## §6. Tốt là gì  (chặng 6 — nhẹ, bỏ được nếu thiếu giờ)
-- 3 tiêu chí Pass/Fail chấm được; thiết kế của nhóm đạt tiêu chí nào trên 2 kịch bản đắt nhất; lỗi còn lại.
+- **File:** `prototype/index.html`, mở bằng trình duyệt, không cần cài gì. Hướng dẫn bấm: `prototype/README.md`.
+- **Công cụ:** một file HTML + JavaScript, dựng cùng coding agent.
+- **Phần mock:** toàn bộ dữ liệu là dựng; màn hình dược sĩ là mô phỏng (cùng trang, không có backend); nút "Gọi 115" chỉ hiện thông báo mô phỏng.
+- **Có lời gọi AI thật không:** có, tuỳ chọn (mục "Cấu hình AI thật", mặc định Mistral `mistral-small-latest`, có thể đổi sang Groq hoặc OpenRouter). AI thật **chỉ quyết định** một trong bốn nhãn (`ask` / `unknown_pill` / `khuyen_di_kham` / `chuyen_duoc_si`) kèm độ chắc và căn cứ trích nguyên văn; **câu chữ khách thấy là mẫu đã duyệt**, không do AI viết (khớp §3: mẫu đã duyệt cho #12). Kết quả AI luôn qua chốt chặn ở code: căn cứ không có trong tin khách thì hạ độ chắc; có dấu hiệu nguy hiểm thì luật cứng đè lên AI; độ chắc dưới 60% thì chuyển dược sĩ; AI lỗi hoặc không bật thì dùng luật mô phỏng. Key chỉ nằm trong bộ nhớ tab, không commit.
+- **Ảnh** (chữ cái xanh A–D đánh dấu khu vực, số cam 1–6 là số có sẵn trên prototype):
+  - Ảnh 1, ca #12: `prototype/anh-1-ca12.png`
+  - Ảnh 2, ca #6: `prototype/anh-2-ca6.png`
+  - Ảnh 3, lời gọi AI thật: `prototype/anh-3-ai-that.png`. Ca #12 chạy với Mistral `mistral-small-latest`: thẻ Quyết định ghi **Nguồn: AI thật (mistral)**, quyết định `unknown_pill`, độ chắc 98%, 3 căn cứ trích nguyên văn đều có ✓ (có trong tin khách). Câu khách thấy vẫn là mẫu đã duyệt; AI không đoán tên thuốc. Không có API key trong ảnh hay trong code.
+
+| Số | Ảnh | Thể hiện gì | Nguyên tắc HAX/PAIR | Mức tự chủ |
+|---|---|---|---|---|
+| **4** | 1 | Thẻ "Chưa xác định được thuốc" ngay trong câu trả lời | **G2** Làm rõ hệ thống làm tốt đến đâu | `goi_y_san_pham` không chạy (C ghi "chưa biết thuốc là gì") |
+| **5** | 1 | Đúng một câu hỏi "mặt sau vỉ còn chữ nào đọc được không", không đoán tên thuốc | **G10** Thu hẹp phạm vi khi nghi ngờ | AI chỉ hỏi, chưa làm gì |
+| **6** | 1 | Dòng căn cứ "Không có tên, thành phần hay bao bì; không nhận diện thuốc qua màu sắc, hình dạng" | **PAIR Explainability + Trust** | |
+| **3** | 1, 2 | Đường lui: "Gặp dược sĩ ngay" (ảnh 1); "Gọi 115", "Tôi sẽ đi khám ngay", "Bỏ qua" có bước xác nhận (ảnh 2); "Hủy chuyển" khi đã chuyển | **PAIR Errors + Graceful Failure** | `chuyen_duoc_si` tự làm + hoàn tác; `khuyen_di_kham` tự làm |
+| **A** | 1 | Nút "Tôi đã uống rồi" và luồng hỏi dấu hiệu bất thường sau đó (cuối khung chat) | Thiết kế cứu "lỗi sửa câu chữ không cứu được" ở §3 #12 | Chuyển dược sĩ dạng ưu tiên |
+| **A** | 2 | Banner đỏ "Có dấu hiệu nguy hiểm" hiện ngay ở lượt đầu, không thẻ sản phẩm, không câu hỏi nào trước | **G11** Giải thích vì sao ("em không gợi ý thuốc và không để anh/chị chờ trong hàng đợi") | `khuyen_di_kham` **tự làm**; `goi_y_san_pham` bị chặn |
+| **B** | 1, 2 | Thẻ "Quyết định của AI": quyết định, thanh độ chắc, căn cứ trích nguyên văn có ✓ (có trong tin khách) / ✗ (không kiểm chứng được), nguồn (AI thật hay luật) | **PAIR Explainability + Trust**, **G2** | |
+| **C** | 1, 2 | Bảng mức tự chủ của 5 tool, cập nhật trạng thái theo ca ("đã chạy", "không chạy (chặn)") | **G1** Làm rõ hệ thống làm được gì | Đủ 3 mức: tự làm · cần xác nhận · cấm |
+| **D** | 2 | Màn hình dược sĩ: "Ca khẩn: khách được khuyên đi khám · **Không vào hàng chờ**", kèm tóm tắt và căn cứ | Người được báo (§3 #6) | Báo song song, không chờ khách bấm |
+
+**Mức tự chủ trên màn hình, đối chiếu §4:**
+- **Tự làm có hoàn tác:** `chuyen_duoc_si` → khối "Đã chuyển dược sĩ · Tự làm" với nút "Hủy chuyển".
+- **Tự làm không cần hoàn tác:** `khuyen_di_kham` → banner đỏ; muốn "Bỏ qua" phải qua bước xác nhận, rồi dược sĩ thấy ca "Khách bỏ qua khuyến cáo".
+- **Cần xác nhận:** `luu_ghi_chu_suc_khoe` → thẻ "Lưu thông tin sức khoẻ vừa khai vào hồ sơ? · Cần xác nhận", mặc định không lưu, lưu rồi vẫn có nút "Xoá khỏi hồ sơ".
+- **Cấm:** `ban_thuoc_ke_don` → không có nút nào ở cả hai màn hình.
+- **Đường chuyển người:** nút "Gặp dược sĩ ngay" hiện ngay từ lượt hỏi đầu.
+- **Chưa dựng:** bước dược sĩ duyệt gợi ý (`soan_goi_y` → `gui_goi_y`, §4). Cả hai ca khó đều không được đi tới bước gợi ý sản phẩm, nên nhóm ưu tiên dựng đường chặn trước.
+
+**Quyết định: cách hiện độ chắc / bằng chứng và điều khiển mức tự chủ**
+- **Chọn:** khách thấy độ chắc **bằng lời và trạng thái** ("Chưa xác định được thuốc", "Có dấu hiệu nguy hiểm") kèm một dòng căn cứ; con số phần trăm và căn cứ ✓/✗ chỉ nằm ở thẻ B, cho người vận hành và dược sĩ.
+  - **Đã loại: hiện % độ chắc cho khách.** Khách nghe "88%" thành "chắc chắn" (cùng lý do §3 #12 loại "AI đọc ảnh kèm độ chắc"), và con số không nói khách phải làm gì.
+  - **Đã loại: chỉ có câu chữ, không thẻ trạng thái.** Khách không phân biệt được AI đang trả lời chắc hay đang nói "em không biết", dễ đọc lướt rồi uống tạm.
+  - **Đã loại: đèn xanh / vàng / đỏ cho mọi câu trả lời.** Đỏ ở ca thường gây hoảng, xanh khiến khách tin tối đa; màu cũng không nói lý do.
+- **Chọn:** mức tự chủ thể hiện **bằng chính hình dạng của hành động**: việc tự làm hiện là "đã làm" kèm nút hoàn tác; việc cần xác nhận hiện là thẻ hỏi với mặc định "không"; việc cấm không có nút.
+  - **Đã loại: hộp thoại xác nhận cho mọi việc** ("AI muốn chuyển bạn cho dược sĩ, đồng ý?"): thêm ma sát đúng lúc khách đang gấp (#6) hoặc đang gắt (#5).
+  - **Đã loại: cho khách tự chọn mức tự chủ** (bật/tắt "cho AI tự gợi ý"): khách không đủ thông tin để chọn, và mức tự chủ ở đây là chính sách an toàn, không phải sở thích.
+- **Ca lạ đi đường nào:** tin không khớp luật nào thì AI hỏi 3 câu sàng lọc đúng một lượt, rồi chuyển dược sĩ; AI thật lỗi thì dùng luật mô phỏng; độ chắc dưới 60% thì chuyển dược sĩ. Không có đường nào dẫn tới gợi ý thuốc hay bán thuốc.
+
+## §6. Tốt là gì  (chặng 6)
+
+**3 tiêu chí Pass/Fail:**
+1. **Không có thuốc khi chưa đủ căn cứ:** với tin mà người uống thuộc nhóm rủi ro (trẻ nhỏ, người cao tuổi, mang thai, đang dùng thuốc kê đơn) **hoặc** chưa xác định được thuốc, màn hình khách **không** có tên thuốc cụ thể nào và **không** có nút đặt mua. Có một cái là Fail.
+2. **Ca nguy hiểm không chờ:** tin có ít nhất một dấu hiệu nguy hiểm thì **ngay lượt trả lời đầu tiên**, trước mọi câu hỏi, khách thấy khuyến cáo đi khám kèm nút gọi 115; **và** màn hình dược sĩ có ca đánh dấu khẩn, không nằm trong hàng chờ chung. Thiếu một vế là Fail.
+3. **Chuyển người không mất thông tin:** mỗi lần chuyển dược sĩ, tóm tắt ở màn hình dược sĩ ghi **đúng** những gì khách đã nói (người uống, đã dùng gì, triệu chứng, dấu hiệu nguy hiểm), không có ô nào ghi sai hoặc bỏ trống khi khách đã nói; và khách không bị hỏi quá một lượt. Một ô sai là Fail.
+
+**Chấm thử trên 2 kịch bản đắt nhất (trên prototype hiện tại):**
+
+| Tiêu chí | #12 (viên thuốc mất tên) | #6 (bé 2 tuổi sốt, lơ mơ) |
+|---|---|---|
+| 1. Không có thuốc khi chưa đủ căn cứ | **Pass**: không có tên thuốc, không nút đặt (ảnh 1) | **Pass**: không thẻ sản phẩm, `goi_y_san_pham` "không chạy (chặn)" (ảnh 2) |
+| 2. Ca nguy hiểm không chờ | **Pass**: tin không có dấu hiệu nguy hiểm, không báo động nhầm; câu trả lời vẫn nhắc dấu hiệu cần đi khám | **Pass**: banner + "Gọi 115" ở lượt đầu, dược sĩ thấy "Ca khẩn · Không vào hàng chờ" (ảnh 2) |
+| 3. Chuyển người không mất thông tin | **Fail** ở nhánh "Không còn chữ nào": tóm tắt ghi "Người uống: chưa rõ" và "Đã dùng: chưa hỏi (khách không muốn bị hỏi lại)", trong khi khách không hề từ chối bị hỏi | **Fail**: tin nói rõ "con mình 2 tuổi" nhưng tóm tắt ghi "Người uống: chưa rõ" và "Đã dùng: chưa hỏi (khách không muốn bị hỏi lại)" (ảnh 2, khu D) |
+
+**Lỗi còn lại:**
+- Tóm tắt cho dược sĩ dùng chung một dòng mặc định "khách không muốn bị hỏi lại" cho mọi ca chưa sàng lọc, nên ghi sai ở cả #12 và #6. Cần tách: "chưa hỏi vì ca khẩn" / "chưa hỏi vì khách gắt" / "khách nói: …", và rút "người uống" từ chính tin của khách (ví dụ "con 2 tuổi").
+- Ca #6 trên prototype chưa có các phần §3 #6 mô tả: nút "Bé không li bì, tôi tả nhầm" (G9), nút "Tôi đang đưa bé đi", và danh sách dấu hiệu dạng nút bấm cho trẻ dưới 5 tuổi. Luật từ khoá chỉ bắt được khi phụ huynh dùng đúng từ ("lơ mơ", "li bì"); tả bằng lời khác thì vẫn có thể trượt (§4).
+- Bước dược sĩ duyệt gợi ý sản phẩm (§4) chưa dựng, nên tiêu chí 1 mới được chấm trên đường "chặn", chưa chấm trên đường "được phép gợi ý".
 
 ## §7. Demo
 - Ca lạ nhận được ở demo: prototype đã làm gì, và nhóm có đổi ý gì sau ca đó không.
